@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Assisi · Phoenix Framework</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+  </head>
+  <body>
+    <header>
+      <section class="container">
+        <nav role="navigation">
+          <ul>
+            <%= if @conn.assigns[:current_user] do %>
+              <li><%= Coherence.current_user_name(@conn) %></li>
+              <li><%= link "Sign Out", to: Routes.session_path(@conn, :delete), method: :delete %></li>
+            <% else %>
+              <li><%= link "Sign In", to: Routes.session_path(@conn, :new) %></li>
+              <li><%= link "Sign Up", to: Routes.registration_path(@conn, :new) %></li>
+              <li><%= link "Forgot Password?", to: Routes.password_path(@conn, :new) %></li>
+            <% end %>
+          </ul>
+        </nav>
+        <a href="/" class="phx-logo">
+          Home
+        </a>
+      </section>
+    </header>
+    <main role="main" class="container">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

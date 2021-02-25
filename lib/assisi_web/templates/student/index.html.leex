@@ -1,0 +1,40 @@
+<h1>Listing Students</h1>
+
+<form action="#" method="get" phx-change="search" onsubmit="event.preventDefault()">
+  <input name="q" type="text" placeholder="Search..." />
+</form>
+
+<span><%= link "New Student", to: Routes.student_path(@socket, :new) %></span>
+
+<table id="student_table">
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Credit</th>
+      <th>Referred By</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for student <- @students do %>
+    <tr>
+      <td><%= student.first_name %></td>
+      <td><%= student.last_name %></td>
+      <td><%= student.email %></td>
+      <td><%= student.credit %></td>
+      <%= if student.referrer do %>
+        <td><%= link "#{student.referrer.last_name}, #{student.referrer.first_name}", to: Routes.student_path(@socket, :show, student.referrer) %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+
+      <td>
+        <%= link "Show", to: Routes.student_path(@socket, :show, student) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

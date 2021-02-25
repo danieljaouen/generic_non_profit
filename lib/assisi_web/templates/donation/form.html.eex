@@ -1,0 +1,37 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <label for="donation_student_id">Student</label>
+  <select id="donation_student_id" name="donation[student_id]">
+    <option value=""></option>
+    <%= for student <- @students do %>
+      <option value="<%= student.id %>" <%= if "#{input_value(f, :student_id)}" == "#{student.id}" do %> selected<% end %>><%= student.last_name %>, <%= student.first_name %></option>
+    <% end %>
+  </select>
+  <%= error_tag f, :student_id %>
+
+  <label for="donation_class_id">Class</label>
+  <select id="donation_class_id" name="donation[class_id]">
+    <option value=""></option>
+    <%= for class <- @classes do %>
+      <option value="<%= class.id %>" <%= if "#{input_value(f, :class_id)}" == "#{class.id}" do %> selected<% end %>><%= class.name %></option>
+    <% end %>
+  </select>
+  <%= error_tag f, :class_id %>
+
+  <%= label f, :amount %>
+  <%= number_input f, :amount, step: "any" %>
+  <%= error_tag f, :amount %>
+
+  <%= label f, :class_date %>
+  <%= date_select f, :class_date %>
+  <%= error_tag f, :class_date %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

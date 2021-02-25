@@ -1,0 +1,15 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Assisi's Internal Yoga Database" %></h1>
+</section>
+
+<section class="row">
+  <article class="column">
+    <%= link "Students", to: Routes.student_path(@conn, :index) %><br />
+    <%= link "Classes", to: Routes.class_path(@conn, :index) %><br />
+    <%= link "Series", to: Routes.series_path(@conn, :index) %><br />
+    <%= link "Drop Ins", to: Routes.drop_in_path(@conn, :index) %><br />
+    <%= link "Floater's Pases", to: Routes.floaters_pass_path(@conn, :index) %><br />
+    <%= link "First Times", to: Routes.first_time_path(@conn, :index) %><br />
+    <%= link "Donations", to: Routes.donation_path(@conn, :index) %><br />
+  </article>
+</section>

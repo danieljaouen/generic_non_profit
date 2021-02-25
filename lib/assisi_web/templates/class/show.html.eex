@@ -1,0 +1,39 @@
+<h1>Show Class</h1>
+
+<ul>
+
+  <li>
+    <strong>Name</strong>
+    <%= @class.name %>
+  </li>
+
+  <li>
+    <strong>Recurrent or one time:</strong>
+    <%= @class.recurrent_or_one_time %>
+  </li>
+
+  <li>
+    <strong>Start date (recurrent):</strong>
+    <%= @class.start_date %>
+  </li>
+
+  <li>
+    <strong>End date (recurrent):</strong>
+    <%= @class.end_date %>
+  </li>
+
+  <li>
+    <strong>Class date (one-time):</strong>
+    <%= @class.class_date %>
+  </li>
+
+  <li>
+    <strong>Drop in cost:</strong>
+    <%= @class.drop_in_cost %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.class_path(@conn, :edit, @class), class: "button" %></span>
+<span><%= link "Delete", to: Routes.class_path(@conn, :delete, @class), class: "button", style: "background-color: red; border-color: red", method: :delete, data: [confirm: "Are you sure?"] %></span><br />
+<span><%= link "Back", to: Routes.class_path(@conn, :index) %></span>

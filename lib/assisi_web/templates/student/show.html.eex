@@ -1,0 +1,245 @@
+<h1>Show Student</h1>
+
+<ul>
+
+  <li>
+    <strong>First name:</strong>
+    <%= @student.first_name %>
+  </li>
+
+  <li>
+    <strong>Last name:</strong>
+    <%= @student.last_name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @student.email %>
+  </li>
+
+  <li>
+    <strong>Credit:</strong>
+    <%= @student.credit %>
+  </li>
+
+  <li>
+    <strong>Referrals:</strong>
+    <%= length(@referrals) %>
+  </li>
+
+  <li>
+    <strong>Referred By:</strong>
+    <%= if @student.referrer do %>
+      <%= link "#{@student.referrer.last_name}, #{@student.referrer.first_name}", to: Routes.student_path(@conn, :show, @student.referrer) %>
+    <% else %>
+      N/A
+    <% end %>
+  </li>
+
+</ul>
+
+<%= if length(@referrals) > 0 do %>
+  <strong>Referrals</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>Name</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for referral <- @referrals do %>
+        <tr>
+          <td><%= link "#{referral.last_name}, #{referral.first_name}", to: Routes.student_path(@conn, :show, referral) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= if length(@past_serieses) > 0 do %>
+  <strong>Past Serieses</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Class</td>
+        <td>Timeslot</td>
+        <td>Current Uses</td>
+        <td>Max Uses</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for series <- @past_serieses do %>
+        <tr>
+          <td><%= link "#{series.id}", to: Routes.series_path(@conn, :show, series) %></td>
+          <td><%= link "#{series.class.name}", to: Routes.class_path(@conn, :show, series.class) %></td>
+          <td><%= series.timeslot %></td>
+          <td><%= series.current_uses %></td>
+          <td><%= series.max_uses %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= if length(@current_serieses) > 0 do %>
+  <strong>Current Serieses</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Class</td>
+        <td>Timeslot</td>
+        <td>Current Uses</td>
+        <td>Max Uses</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for series <- @current_serieses do %>
+        <tr>
+          <td><%= link "#{series.id}", to: Routes.series_path(@conn, :show, series) %></td>
+          <td><%= link "#{series.class.name}", to: Routes.class_path(@conn, :show, series.class) %></td>
+          <td><%= series.timeslot %></td>
+          <td><%= series.current_uses %></td>
+          <td><%= series.max_uses %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= if length(@paid_drop_ins) > 0 do %>
+  <strong>Paid Drop Ins</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Class</td>
+        <td>Date</td>
+        <td>Timeslot</td>
+        <td>Paid?</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for drop_in <- @paid_drop_ins do %>
+        <tr>
+          <td><%= link "#{drop_in.id}", to: Routes.drop_in_path(@conn, :show, drop_in) %></td>
+          <td><%= link "#{drop_in.class.name}", to: Routes.class_path(@conn, :show, drop_in.class) %></td>
+          <td><%= "#{drop_in.date}" %></td>
+          <td><%= "#{drop_in.timeslot}" %></td>
+          <td><%= "#{drop_in.paid}" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= if length(@unpaid_drop_ins) > 0 do %>
+  <strong>Unpaid Drop Ins</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Class</td>
+        <td>Date</td>
+        <td>Timeslot</td>
+        <td>Paid?</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for drop_in <- @unpaid_drop_ins do %>
+        <tr>
+          <td><%= link "#{drop_in.id}", to: Routes.drop_in_path(@conn, :show, drop_in) %></td>
+          <td><%= link "#{drop_in.class.name}", to: Routes.class_path(@conn, :show, drop_in.class) %></td>
+          <td><%= "#{drop_in.date}" %></td>
+          <td><%= "#{drop_in.timeslot}" %></td>
+          <td><%= "#{drop_in.paid}" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= if length(@unexpired_floaters_passes) > 0 do %>
+  <strong>Unexpired Floaters Passes</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Expiration Date</td>
+        <td>Current Uses</td>
+        <td>Max Uses</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for floaters_pass <- @unexpired_floaters_passes do %>
+        <tr>
+          <td><%= link "#{floaters_pass.id}", to: Routes.floaters_pass_path(@conn, :show, floaters_pass) %></td>
+          <td><%= "#{floaters_pass.expiration_date}" %></td>
+          <td><%= "#{floaters_pass.current_uses}" %></td>
+          <td><%= "#{floaters_pass.max_uses}" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= if length(@student.first_times) > 0 do %>
+  <strong>First Times</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Class</td>
+        <td>Date</td>
+        <td>Timeslot</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for first_time <- @student.first_times do %>
+        <tr>
+          <td><%= link "#{first_time.id}", to: Routes.first_time_path(@conn, :show, first_time) %></td>
+          <td><%= link "#{first_time.class.name}", to: Routes.class_path(@conn, :show, first_time.class) %></td>
+          <td><%= "#{first_time.date}" %></td>
+          <td><%= "#{first_time.timeslot}" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= if length(@student.donations) > 0 do %>
+  <strong>Donations</strong>
+  <table>
+    <thead>
+      <tr>
+        <td>ID</td>
+        <td>Class</td>
+        <td>Amount</td>
+        <td>Date</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for donation <- @student.donations do %>
+        <tr>
+          <td><%= link "#{donation.id}", to: Routes.donation_path(@conn, :show, donation) %></td>
+          <td><%= link "#{donation.class.name}", to: Routes.class_path(@conn, :show, donation.class) %></td>
+          <td><%= "#{donation.amount}" %></td>
+          <td><%= "#{donation.class_date}" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<span><%= link "Edit", to: Routes.student_path(@conn, :edit, @student), class: "button" %></span>
+<span><%= link "Delete", to: Routes.student_path(@conn, :delete, @student), class: "button", style: "background-color: red; border-color: red", method: :delete, data: [confirm: "Are you sure?"] %></span><br />
+<span><%= link "Back", to: Routes.student_path(@conn, :index) %></span>

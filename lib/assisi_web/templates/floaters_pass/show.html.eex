@@ -1,0 +1,29 @@
+<h1>Show Floaters pass</h1>
+
+<ul>
+
+  <li>
+    <strong>Student:</strong>
+    <%= link "#{@floaters_pass.student.last_name}, #{@floaters_pass.student.first_name}", to: Routes.student_path(@conn, :show, @floaters_pass.student) %>
+  </li>
+
+  <li>
+    <strong>Expiration date:</strong>
+    <%= @floaters_pass.expiration_date %>
+  </li>
+
+  <li>
+    <strong>Max uses:</strong>
+    <%= @floaters_pass.max_uses %>
+  </li>
+
+  <li>
+    <strong>Current uses:</strong>
+    <%= @floaters_pass.current_uses %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.floaters_pass_path(@conn, :edit, @floaters_pass), class: "button" %></span>
+<span><%= link "Delete", to: Routes.floaters_pass_path(@conn, :delete, @floaters_pass), class: "button", style: "background-color: red; border-color: red", method: :delete, data: [confirm: "Are you sure?"] %></span><br />
+<span><%= link "Back", to: Routes.floaters_pass_path(@conn, :index) %></span>

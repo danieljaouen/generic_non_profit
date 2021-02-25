@@ -1,0 +1,39 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <%= label f, :recurrent_or_one_time %>
+  <select id="class_recurrent_or_one_time" name="class[recurrent_or_one_time]">
+    <option value=""></option>
+    <option value="Recurrent" <%= if input_value(f, :recurrent_or_one_time) == "Recurrent" do %> selected<% end %>>Recurrent</option>
+    <option value="One-Time" <%= if input_value(f, :recurrent_or_one_time) == "One-Time" do %> selected<% end %>>One-Time</option>
+  </select>
+  <%= error_tag f, :recurrent_or_one_time %>
+
+  <label for="class_start_date">Start Date (Recurrent)</label>
+  <%= date_select f, :start_date %>
+  <%= error_tag f, :start_date %>
+
+  <label for="class_end_date">End Date (Recurrent)</label>
+  <%= date_select f, :end_date %>
+  <%= error_tag f, :end_date %>
+
+  <label for="class_class_date">Class Date (one-time)</label>
+  <%= date_select f, :class_date %>
+  <%= error_tag f, :class_date %>
+
+  <%= label f, :drop_in_cost %>
+  <%= number_input f, :drop_in_cost %>
+  <%= error_tag f, :drop_in_cost %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

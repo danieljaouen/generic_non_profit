@@ -1,0 +1,5 @@
+<h1>Edit Floaters pass</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.floaters_pass_path(@conn, :update, @floaters_pass)) %>
+
+<span><%= link "Back", to: Routes.floaters_pass_path(@conn, :index) %></span>

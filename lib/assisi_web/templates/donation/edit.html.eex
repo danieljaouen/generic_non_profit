@@ -1,0 +1,5 @@
+<h1>Edit Donation</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.donation_path(@conn, :update, @donation)) %>
+
+<span><%= link "Back", to: Routes.donation_path(@conn, :index) %></span>

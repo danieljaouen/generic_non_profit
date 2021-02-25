@@ -1,0 +1,43 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <label for="first_time_student_id">Student</label>
+  <select id="first_time_student_id" name="first_time[student_id]">
+    <option value=""></option>
+    <%= for student <- @students do %>
+      <option value="<%= student.id %>" <%= if "#{input_value(f, :student_id)}" == "#{student.id}" do %> selected<% end %>><%= student.last_name %>, <%= student.first_name %></option>
+    <% end %>
+  </select>
+  <%= error_tag f, :student_id %>
+
+  <label for="first_time_class_id">Class</label>
+  <select id="first_time_class_id" name="first_time[class_id]">
+    <option value=""></option>
+    <%= for class <- @classes do %>
+      <option value="<%= class.id %>" <%= if "#{input_value(f, :class_id)}" == "#{class.id}" do %> selected<% end %>><%= class.name %></option>
+    <% end %>
+  </select>
+  <%= error_tag f, :class_id %>
+
+  <%= label f, :date %>
+  <%= date_select f, :date %>
+  <%= error_tag f, :date %>
+
+  <%= label f, :timeslot %>
+  <select id="first_time_timeslot" name="first_time[timeslot]">
+    <option value=""></option>
+    <option value="Tuesday" <%= if input_value(f, :timeslot) == "Tuesday" do %> selected<% end %>>Tuesday</option>
+    <option value="Wednesday AM" <%= if input_value(f, :timeslot) == "Wednesday AM" do %> selected<% end %>>Wednesday AM</option>
+    <option value="Wednesday PM" <%= if input_value(f, :timeslot) == "Wednesday PM" do %> selected<% end %>>Wednesday PM</option>
+    <option value="Saturday" <%= if input_value(f, :timeslot) == "Saturday" do %> selected<% end %>>Saturday</option>
+  </select>
+  <%= error_tag f, :timeslot %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

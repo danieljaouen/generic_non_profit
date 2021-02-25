@@ -1,0 +1,34 @@
+<h1>Listing Classes</h1>
+
+<span><%= link "New Class", to: Routes.class_path(@conn, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Recurrent or one time</th>
+      <th>Start date (recurrent)</th>
+      <th>End date (recurrent)</th>
+      <th>Class date (one-time)</th>
+      <th>Drop in cost</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for class <- @classes do %>
+    <tr>
+      <td><%= class.name %></td>
+      <td><%= class.recurrent_or_one_time %></td>
+      <td><%= class.start_date %></td>
+      <td><%= class.end_date %></td>
+      <td><%= class.class_date %></td>
+      <td><%= class.drop_in_cost %></td>
+
+      <td>
+        <%= link "Show", to: Routes.class_path(@conn, :show, class) %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

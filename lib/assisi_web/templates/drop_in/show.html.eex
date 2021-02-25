@@ -1,0 +1,34 @@
+<h1>Show Drop in</h1>
+
+<ul>
+
+  <li>
+    <strong>Student:</strong>
+    <%= link "#{@drop_in.student.last_name}, #{@drop_in.student.last_name}", to: Routes.student_path(@conn, :show, @drop_in.student) %>
+  </li>
+
+  <li>
+    <strong>Class:</strong>
+    <%= link "#{@drop_in.class.name}", to: Routes.class_path(@conn, :show, @drop_in.class) %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @drop_in.date %>
+  </li>
+
+  <li>
+    <strong>Timeslot:</strong>
+    <%= @drop_in.timeslot %>
+  </li>
+
+  <li>
+    <strong>Paid:</strong>
+    <%= @drop_in.paid %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.drop_in_path(@conn, :edit, @drop_in), class: "button" %></span>
+<span><%= link "Delete", to: Routes.drop_in_path(@conn, :delete, @drop_in), class: "button", style: "background-color: red; border-color: red", method: :delete, data: [confirm: "Are you sure?"] %></span><br />
+<span><%= link "Back", to: Routes.drop_in_path(@conn, :index) %></span>

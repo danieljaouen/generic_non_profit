@@ -1,0 +1,30 @@
+<h1>Listing First times</h1>
+
+<span><%= link "New First time", to: Routes.first_time_path(@conn, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Class</th>
+      <th>Date</th>
+      <th>Timeslot</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for first_time <- @first_times do %>
+    <tr>
+      <td><%= link "#{first_time.student.last_name}, #{first_time.student.first_name}", to: Routes.student_path(@conn, :show, first_time.student) %></td>
+      <td><%= link "#{first_time.class.name}", to: Routes.class_path(@conn, :show, first_time.class) %></td>
+      <td><%= first_time.date %></td>
+      <td><%= first_time.timeslot %></td>
+
+      <td>
+        <%= link "Show", to: Routes.first_time_path(@conn, :show, first_time) %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

@@ -1,0 +1,30 @@
+<h1>Listing Floaters passes</h1>
+
+<span><%= link "New Floaters pass", to: Routes.floaters_pass_path(@conn, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Expiration date</th>
+      <th>Max uses</th>
+      <th>Current uses</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for floaters_pass <- @floaters_passes do %>
+    <tr>
+      <td><%= link "#{floaters_pass.student.last_name}, #{floaters_pass.student.first_name}", to: Routes.student_path(@conn, :show, floaters_pass.student) %></td>
+      <td><%= floaters_pass.expiration_date %></td>
+      <td><%= floaters_pass.max_uses %></td>
+      <td><%= floaters_pass.current_uses %></td>
+
+      <td>
+        <%= link "Show", to: Routes.floaters_pass_path(@conn, :show, floaters_pass) %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

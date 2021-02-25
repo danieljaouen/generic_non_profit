@@ -1,0 +1,32 @@
+<h1>Listing Series</h1>
+
+<span><%= link "New Series", to: Routes.series_path(@conn, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Class</th>
+      <th>Timeslot</th>
+      <th>Current Uses</th>
+      <th>Max Uses</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for series <- @series do %>
+    <tr>
+      <td><%= link "#{series.student.last_name}, #{series.student.first_name}", to: Routes.student_path(@conn, :show, series.student) %></td>
+      <td><%= link "#{series.class.name}", to: Routes.class_path(@conn, :show, series.class) %></td>
+      <td><%= series.timeslot %></td>
+      <td><%= series.current_uses %></td>
+      <td><%= series.max_uses %></td>
+
+      <td>
+        <%= link "Show", to: Routes.series_path(@conn, :show, series) %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

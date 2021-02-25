@@ -1,0 +1,32 @@
+<h1>Listing Drop ins</h1>
+
+<span><%= link "New Drop in", to: Routes.drop_in_path(@conn, :new) %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Class</th>
+      <th>Date</th>
+      <th>Timeslot</th>
+      <th>Paid</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for drop_in <- @drop_ins do %>
+    <tr>
+      <td><%= link "#{drop_in.student.last_name}, #{drop_in.student.first_name}", to: Routes.student_path(@conn, :show, drop_in.student) %></td>
+      <td><%= link "#{drop_in.class.name}", to: Routes.drop_in_path(@conn, :show, drop_in.class) %></td>
+      <td><%= drop_in.date %></td>
+      <td><%= drop_in.timeslot %></td>
+      <td><%= drop_in.paid %></td>
+
+      <td>
+        <%= link "Show", to: Routes.drop_in_path(@conn, :show, drop_in) %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

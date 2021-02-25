@@ -1,0 +1,34 @@
+<h1>Show Series</h1>
+
+<ul>
+
+  <li>
+    <strong>Student:</strong>
+    <%= link "#{@series.student.last_name}, #{@series.student.first_name}", to: Routes.student_path(@conn, :show, @series.student) %>
+  </li>
+
+  <li>
+    <strong>Class:</strong>
+    <%= link "#{@series.class.name}", to: Routes.class_path(@conn, :show, @series.class) %>
+  </li>
+
+  <li>
+    <strong>Timeslot:</strong>
+    <%= @series.timeslot %>
+  </li>
+
+  <li>
+    <strong>Current Uses:</strong>
+    <%= @series.current_uses %>
+  </li>
+
+  <li>
+    <strong>Max Uses:</strong>
+    <%= @series.max_uses %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.series_path(@conn, :edit, @series), class: "button" %></span>
+<span><%= link "Delete", to: Routes.series_path(@conn, :delete, @series), class: "button", style: "background-color: red; border-color: red", method: :delete, data: [confirm: "Are you sure?"] %></span><br />
+<span><%= link "Back", to: Routes.series_path(@conn, :index) %></span>

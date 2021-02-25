@@ -1,0 +1,30 @@
+<h1>Listing Donations</h1>
+
+<span><%= link "New Donation", to: Routes.donation_path(@conn, :new) %></span>
+
+<table id="donations_table">
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Class</th>
+      <th>Amount</th>
+      <th>Class date</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for donation <- @donations do %>
+    <tr>
+      <td><%= link "#{donation.student.last_name}, #{donation.student.first_name}", to: Routes.student_path(@conn, :show, donation.student) %></td>
+      <td><%= link "#{donation.class.name}", to: Routes.class_path(@conn, :show, donation.class) %></td>
+      <td><%= donation.amount %></td>
+      <td><%= donation.class_date %></td>
+
+      <td>
+        <%= link "Show", to: Routes.donation_path(@conn, :show, donation) %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

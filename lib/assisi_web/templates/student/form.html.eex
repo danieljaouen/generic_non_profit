@@ -1,0 +1,37 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :first_name %>
+  <%= text_input f, :first_name %>
+  <%= error_tag f, :first_name %>
+
+  <%= label f, :last_name %>
+  <%= text_input f, :last_name %>
+  <%= error_tag f, :last_name %>
+
+  <%= label f, :email %>
+  <%= text_input f, :email %>
+  <%= error_tag f, :email %>
+
+  <%= label f, :credit %>
+  <%= text_input f, :credit %>
+  <%= error_tag f, :credit %>
+
+  <label for="student_referrer_id">Referred By</label>
+  <select id="student_referrer_id" name="student[referrer_id]">
+    <option value=""></option>
+    <%= for student <- @students do %>
+      <option value="<%= student.id %>" <%= if "#{input_value(f, :referrer_id)}" == "#{student.id}" do %> selected<% end %>><%= student.last_name %>, <%= student.first_name %></option>
+    <% end %>
+  </select>
+  <%= error_tag f, :referrer_id %>
+
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

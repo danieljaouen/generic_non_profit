@@ -1,0 +1,29 @@
+<h1>Show First time</h1>
+
+<ul>
+
+  <li>
+    <strong>Student:</strong>
+    <%= link "#{@first_time.student.last_name}, #{@first_time.student.first_name}", to: Routes.student_path(@conn, :show, @first_time.student) %>
+  </li>
+
+  <li>
+    <strong>Class:</strong>
+    <%= link "#{@first_time.class.name}", to: Routes.class_path(@conn, :show, @first_time.class) %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @first_time.date %>
+  </li>
+
+  <li>
+    <strong>Timeslot:</strong>
+    <%= @first_time.timeslot %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.first_time_path(@conn, :edit, @first_time), class: "button" %></span>
+<span><%= link "Delete", to: Routes.first_time_path(@conn, :delete, @first_time), class: "button", style: "background-color: red; border-color: red", method: :delete, data: [confirm: "Are you sure?"] %></span><br />
+<span><%= link "Back", to: Routes.first_time_path(@conn, :index) %></span>

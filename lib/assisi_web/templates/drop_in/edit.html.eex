@@ -1,0 +1,5 @@
+<h1>Edit Drop in</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.drop_in_path(@conn, :update, @drop_in)) %>
+
+<span><%= link "Back", to: Routes.drop_in_path(@conn, :index) %></span>
